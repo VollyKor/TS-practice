@@ -1,37 +1,31 @@
-// Напиши скрипт проверки количества товаров на складе.
-//  Есть переменные total (количество товаров на складе)
-//  ordered (единиц товара в заказе).
+class User {
+  constructor (name, age, followers) {
+    this.name = name ; 
+    this.age = age ;
+    this.followers = followers ;
+  }
 
-// Сравни эти значения и по результатам выведи:
+    getInfo (name, age, followers) {
+     return `User ${this.name} is ${this.age} years old and has ${this.followers} followers`
+    }
+}
 
-// Если в заказе указано число,
-// превышающее количество товаров на складе,
-// то выведи сообщение "На складе недостаточно твоаров!".
 
-// В другом случае выводи сообщение
-// "Заказ оформлен, с вами свяжется менеджер".
 
-// Проверь работоспособность кода с разными значениями
-// переменной ordered, например 20, 80 и 130.
 
-// const total = 100;
-// const ordered = 50;
+ // Write code under this line
+  
 
-console.log("task-2");
+console.log(typeof User);
+// 'function'
 
-const total = 100;
-const ordered = 140;
+const mango = new User('Mango', 2, 20);
+console.log(mango.getInfo()); 
+// 'User Mango is 2 years old and has 20 followers'
 
-let message = "Заказ оформлен, с вами свяжется менеджер";
+console.log(typeof mango.getInfo); 
+// 'function'  
 
-// var 1
-total >= ordered ? message : (message = "На складе недостаточно твоаров!");
-
-console.log(message);
-// var 2
-// if (total < ordered) {
-//     console.log('На складе недостаточно твоаров!')
-// }
-// else {
-//     console.log('Заказ оформлен, с вами свяжется менеджер')
-// }
+const poly = new User( 'Poly', 3, 17);
+console.log(poly.getInfo());
+// 'User Poly is 3 years old and has 17 followers'

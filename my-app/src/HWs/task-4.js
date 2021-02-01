@@ -1,61 +1,45 @@
-// На счету пользователя есть 23580 кредитов, 
-// значение хранится в переменной credits (создай и присвой). 
+ // Write code under this line
+  class StringBuilder {
+    constructor (value){
+      this._value = value
+    }
 
-// Пользователь решает купить ремонтных дроидов, 
-// которые стоят по 3000 кредитов за штуку. 
-// Цена одного дроида хранится в переменной pricePerDroid 
-// (создай и присвой).
+    get value() {
+      return this._value
+    }
 
-// При посещении страницы, используя prompt, 
-// необходимо спросить количество дроидов которые 
-// пользователь хочет купить и сохранить в переменную.
+    // set value(str) {
+    //   return this._value + str
+    // }
 
-// Напиши скрипт который:
 
-// Если в prompt была нажата кнопка Cancel, 
-// выводит в консоль сообщение 'Отменено пользователем!'.
+    append(str){
+      return this._value += str
+    }
 
-// В противном случае, рассчитывает общую цену заказа и сохраняет 
-// в переменной totalPrice.
+    prepend(str){
+      return this._value = str + this._value
+    }
 
-// Проверяет сможет ли пользователь оплатить заказ:
-// если сумма к оплате превышает количество кредитов на счету, 
-// выводи в консоль сообщение 'Недостаточно средств на счету!'.
+    pad (str) {
+      this.append(str)
+      this.prepend(str)
+      return this.value 
+    }
 
-// в противном случае необходимо посчитать остаток кредитов 
-// на счету и вывести сообщение 
-// 'Вы купили [число] дроидов, на счету осталось [число] кредитов.'.
+  }
 
-console.log('task-4');
+console.log(typeof StringBuilder);
+// 'function'
 
-let credits = 23580;
 
-const pricePerDroid = 3000;
-let totalPrice;
-let droidQuantity = prompt ('Сколько дроидов вы хотите купить?');
+const builder = new StringBuilder('.');
 
-console.log( 'Количество дронов', droidQuantity);
+builder.append('^');
+console.log(builder.value); // '.^'
 
-// droidQuantity === null ? console.log('Отменено пользователем!') : totalPrice = pricePerDroid * droidQuantity;
-// console.log('total Price', totalPrice);
+builder.prepend('^');
+console.log(builder.value); // '^.^'
 
-// if (droidQuantity === null) {
-//     console.log('Отменено пользователем!');
-// }
-// else {
-//    totalPrice = pricePerDroid * droidQuantity;
-// }
-
-droidQuantity === null ? console.log('Отменено пользователем!') : totalPrice = pricePerDroid * droidQuantity ;
-
-console.log('total Price' , totalPrice);
-
-// if  (totalPrice > credits) { 
-//     console.log('Недостаточно средств на счету') 
-// } 
-// else {
-//     credits -= totalPrice
-// console.log(`Вы купили ${droidQuantity} дроидов, на счету осталось ${credits} кредитов.`);
-// }
-
-totalPrice > credits ?  console.log('Недостаточно средств на счету') : (credits -= totalPrice ,console.log(`Вы купили ${droidQuantity} дроидов, на счету осталось ${credits} кредитов.`) )
+builder.pad('=');
+console.log(builder.value); // '=^.^='

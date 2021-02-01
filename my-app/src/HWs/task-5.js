@@ -1,119 +1,73 @@
-// Пользователь может оформить доставку товара к себе в страну,
-// указав ее при посещении страницы в prompt. Учти,
-// пользователь может ввести имя страны не только буквами
-// нижнего регистра, а к примеру 'кИтАЙ'.
-
-// Напиши скрипт который выводит сообщение о стоимости доставки
-// в указанную страну. Обязательно используй switch.
-// Формат сообщения:
-// 'Доставка в [страна] будет стоить [цена] кредитов'.
-
-// Но доставка есть не везде, если указанной страны нет в списке,
-// то выводи в alert сообщение 'В вашей стране доставка не доступна'.
-
-// Ниже приведен список стран и стоимость доставки.
-
-// Китай - 100 кредитов
-// Чили - 250 кредитов
-// Австралия - 170 кредитов
-// Индия - 80 кредитов
-// Ямайка - 120 кредитов
-
-// 1. переменная в промт
-// 2.1 приведение к нижнему регистру
-// 2.2 Сравнение в свитч
-
-console.log("task-5");
-
-// const deliveryCountry = prompt('укажите страну доставки');
-// let deliveryCost;
-
-// if (deliveryCountry === null) {
-//     console.log('Страна доставки не указана');
-// }
-// else {
-//     switch ( deliveryCountry.toLowerCase() ) {
-//         case 'китай' :
-//             deliveryCost = 100;
-//             console.log(`${deliveryCost} кредитов`);
-//             break;
-
-//         case 'чили' :
-//             deliveryCost = 250;
-//             console.log(`${deliveryCost} кредитов`);
-//             break;
-
-//         case 'австралия' :
-//             deliveryCost = 170;
-//             console.log(`${deliveryCost} кредитов`);
-//             break;
-
-//         case 'индия':
-//             deliveryCost = 80;
-//             console.log(`${deliveryCost} кредитов`);
-//             break;
-
-//         case 'ямайка':
-//             deliveryCost = 120;
-//             console.log(`${deliveryCost} кредитов`);
-//             break;
-
-//         default :
-//             console.log(`доставка в страну ${deliveryCountry} недоступна` );
-
-// }
-// }
-
-const countryName = "ЧИЛнрИ";
-
-const CANCELED_BY_USER = "Отменено пользователем!";
-const NO_DELIVERY = "В выбранную страну доставка недоступна.";
-const CHINA = "Китай";
-const AUSTRALIA = "Австралия";
-const INDIA = "Индия";
-const JAMAICA = "Ямайка";
-let message;
-let price = 0;
-let country = "";
-if (countryName === null) {
-  message = CANCELED_BY_USER;
-} else {
-  country = countryName[0].toUpperCase() + countryName.toLowerCase().slice(1); // Write code on this line
-  switch (country) {
+class Car {
     // Write code under this line
+    constructor ({maxSpeed = 0, speed = 0, isOn = false, distance = 0, price}){
+        this.maxSpeed = maxSpeed;
+        this.speed = speed;
+        this.isOn = isOn;
+        this.distance = distance;
+        this._price = price;
+    } 
 
-    case CHINA:
-      price = 100;
-      break;
-    case AUSTRALIA:
-      price = 170;
-      break;
-    case INDIA:
-      price = 80;
-      break;
-    case JAMAICA:
-      price = 120;
-      break;
-    default:
-      message = NO_DELIVERY;
-  }
-}
-console.log(message);
+        static getSpecs(car){
+        return `maxSpeed: ${car.maxSpeed}, speed: ${car.speed}, isOn: ${car.isOn}, distance: ${car.distance}, price: ${car._price}`
+    }
 
-if (message !== NO_DELIVERY) {
-  // Write code on this line
-  message = `Доставка в ${country} будет стоить ${price} кредитов`;
-}
+     get price() {
+         return this._price;
+     }
 
-console.log(message);
-//если countryName равно "КитаЙ"
-// то значение message будет равно
-// 'Доставка в Китай будет стоить 100 кредитов'
+     set price(value) {
+         return this._price = value;
+     }
 
-//если countryName равно null
-// то значение message будет равно
-// 'Отменено пользователем!'
+     turnOn() {
+         return this.isOn = true ;
+     }
 
-//если countryName равно "Чили"
-// то значение message будет равно
-// 'В выбранную страну доставка недоступна.'
+     turnOff() {
+         this.speed = 0 ;
+         return this.isOn = false;
+     }
+
+     accelerate(value) {
+         if (this.maxSpeed < this.speed + value) {
+            return this.speed = this.maxSpeed;
+         }
+         return this.speed += value;
+     }
+
+     decelerate(value) {
+        if ( 0 < this.speed - value) {
+            return this.speed -= value;
+         }
+         return this.speed = 0
+     }
+
+     drive(hours) {
+         if (this.isOn === true){
+             return this.distance += this.speed * hours
+         }
+     }
+   }
+    
+   const mustang = new Car({ maxSpeed: 200, price: 2000 });
+   mustang.turnOn();
+   mustang.accelerate(50);
+   mustang.drive(2);
+   mustang.accelerate(50);
+   mustang.accelerate(50);
+   mustang.accelerate(250);
+   console.log(Car.getSpecs(mustang));
+   // 'maxSpeed: 200, speed: 50, isOn: true, distance: 100, price: 2000'
+   
+   mustang.decelerate(20);
+   mustang.drive(1);
+   mustang.turnOff();
+   
+   console.log(Car.getSpecs(mustang));
+   // 'maxSpeed: 200, speed: 0, isOn: false, distance: 130, price: 2000'
+   
+   // console.log(mustang.price); // 2000
+   mustang.price = 4000;
+   console.log(mustang.price); // 4000
+   

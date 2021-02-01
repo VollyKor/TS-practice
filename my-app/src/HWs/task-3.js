@@ -1,48 +1,63 @@
-// Напиши скрипт имитирующий авторизацию администратора 
-// в панели управления.
+ // Write code under this line
+  class Storage {
+    constructor (items) {
+      this.items = items;
+    }
 
-// Есть переменная message в которую будет записано сообщение 
-// о результате. 
+    getItems () {
+      return this.items
+    }
 
-// При загрузке страницы у посетителя запрашивается 
-// пароль через prompt:
+    addItem(item){
+      return this.items.push(item)
+    }
 
-// Если нажали Cancel, 
-// записать в message строку 'Отменено пользователем!'
-
-// В протовном случае, 
-// если введен пароль который совпадает 
-// со значением константы ADMIN_PASSWORD, 
-// записать в message строку 'Добро пожаловать!'
-
-// В противном случае, то есть если ни одно из предыдущих 
-// условий не выполнилось, записать в message 
-// строку 'Доступ запрещен, неверный пароль!'
-// После всех проверок вывести в alert 
-// значение переменной message.
-
-// const ADMIN_PASSWORD = 'jqueryismyjam';
-// let message;
-
-console.log('task-3');
-
-let message = prompt ('Введите пароль');
-
-const ADMIN_PASSWORD = 'jqueryismyjam';
-
-// console.log(message);
-
-// if (message === null) {
-//     message = 'Отменено пользователем!'
-// }
-// else if (message === ADMIN_PASSWORD) {
-// message = 'Добро пожаловать!'
-// }
-// else {
-//     message = 'Доступ запрещен, неверный пароль!'
-// }
-
-message === null ?  message = 'Отменено пользователем!' :  message === ADMIN_PASSWORD ? message = 'Добро пожаловать!' :  message = 'Доступ запрещен, неверный пароль!' ;
+    removeItem(item){
+      if (this.items.includes(item)) {
+        const indexItem = this.items.indexOf(item);
+        return this.items.splice(indexItem, 1)
+      }
+    }
+  }
 
 
-console.log(message);
+
+console.log(typeof Storage);
+// 'function'
+
+const goods = [
+  'Нанитоиды',
+  'Пролонгер',
+  'Железные жупи',
+  'Антигравитатор'
+];
+
+const storage = new Storage(goods);
+
+console.log(storage.getItems());
+/* [
+  'Нанитоиды',
+  'Пролонгер',
+  'Железные жупи',
+  'Антигравитатор'
+] */
+
+storage.addItem('Дроид');
+console.log(storage.getItems());
+/* [
+  'Нанитоиды',
+  'Пролонгер',
+  'Железные жупи',
+  'Антигравитатор',
+  'Дроид'
+] */
+
+storage.removeItem('Пролонгер');
+console.log(storage.getItems());
+/* [
+  'Нанитоиды',
+  'Железные жупи',
+  'Антигравитатор',
+  'Дроид'
+] */
+
